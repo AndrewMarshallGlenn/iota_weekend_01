@@ -16,14 +16,14 @@ $(document).ready(function() {
 	$('.empRvBtn').data('salary', values.empSalary);
 	calcMonthly(values);
 	console.log(monthlyCosts); 
+	$('#empFirstName').focus();
 	});
 
 	$('#container').on('click', '.empRvBtn', function(){
 		var $salaryTBR = $(this).data('salary'); 
 		totalSalaries -= $salaryTBR;
 		monthlyCosts = Math.round(totalSalaries / 12);
-		$(this).addClass('tbr');
-		removeEmp();
+		$(this).parent().remove();
 		console.log(monthlyCosts);
 	});
 
@@ -42,8 +42,6 @@ $(document).ready(function() {
 		monthlyCosts =  Math.round(totalSalaries / 12);
 	}
 
-	function removeEmp(){
-		$('.tbr').parent().remove();
-	}
+
 
 });
