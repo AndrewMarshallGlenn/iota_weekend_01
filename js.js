@@ -8,17 +8,23 @@ $(document).ready(function() {
 		var values = {};
 		$.each($('#employeeForm').serializeArray(), function(i, field) {
 		values[field.name] = field.value;
+		
 	});
 	
 	$('#employeeForm').find('input[type=text]').val('');
 	appendDom(values);
+	$('.empRvBtn').data('salary', values.empSalary);
 	calcMonthly(values);
 	console.log(monthlyCosts); 
 	});
 
 	$('#container').on('click', '.empRvBtn', function(){
+		var $salaryTBR = $(this).data('salary'); 
+		totalSalaries -= $salaryTBR;
+		monthlyCosts = Math.round(totalSalaries / 12);
 		$(this).addClass('tbr');
 		removeEmp();
+		console.log(monthlyCosts);
 	});
 
 	function appendDom(empInfo) {
@@ -33,7 +39,7 @@ $(document).ready(function() {
 
 	function calcMonthly(empInfo) {
 		totalSalaries += parseFloat(empInfo.empSalary)
-		monthlyCosts =  totalSalaries / 12;
+		monthlyCosts =  Math.round(totalSalaries / 12);
 	}
 
 	function removeEmp(){
